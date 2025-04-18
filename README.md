@@ -1,19 +1,14 @@
-# API Rover - MCP Server with Playwright API Tracking
+# MCP API Server
 
-API Rover is a Model Context Protocol (MCP) server that uses Playwright to track and record API calls during web browsing sessions. It provides a set of tools to open a browser window, navigate to any URL, and collect detailed information about API calls made during the session.
+An API-focused Model Context Protocol (MCP) server that provides authentication and API call capabilities. This server allows secure API calls through MCP tools, with authentication management and response handling.
 
 ## Features
 
-- Open a browser window where users can navigate to any website
-- Automatically intercept and track all API calls made during browsing
-- Record comprehensive metadata for each API call:
-  - URL
-  - HTTP method
-  - Request headers and body
-  - Response status, headers, and body
-  - Timestamp
-- Filter collected API calls by URL pattern or method
-- Return all collected data as structured JSON
+- Authentication management with token-based security
+- Make authenticated API calls to external services
+- Secure token management with authentication state tracking
+- Well-typed responses using the MCP protocol structure
+- Response formatting for different content types (JSON, text)
 
 ## Prerequisites
 
@@ -24,8 +19,8 @@ API Rover is a Model Context Protocol (MCP) server that uses Playwright to track
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/api-rover.git
-cd api-rover
+git clone https://github.com/ranjanmadhu/mcp-api-server.git
+cd mcp-api-server
 
 # Install dependencies
 npm install
@@ -46,44 +41,42 @@ npm start
 
 ## MCP Integration
 
-API Rover is designed to be used with MCP-compatible clients. The server exposes the following tools:
+This MCP server exposes the following tools:
 
-### 1. `open-browser`
+### 1. `auth`
 
-Opens a browser window for navigating and tracking API calls.
-
-Parameters:
-- `browserType`: The type of browser to open (`chromium`, `firefox`, or `webkit`)
-- `initialUrl`: The initial URL to navigate to
-
-### 2. `get-api-calls`
-
-Gets all tracked API calls during the current session.
-
-No parameters.
-
-### 3. `filter-api-calls`
-
-Filters the tracked API calls by URL pattern or method.
+Manages authentication tokens for secure API access.
 
 Parameters:
-- `urlPattern` (optional): URL pattern to filter by (e.g., '/api/users')
-- `method` (optional): HTTP method to filter by (e.g., 'GET', 'POST')
+- `action`: The authentication action to perform (`set`, `check`, or `clear`)
+- `token`: The authentication token (required for `set` action)
+
+### 2. `vehicle_api`
+
+Makes an API call to retrieve vehicle data from an external API.
+
+No parameters required.
 
 ## Data Structure
 
-Each API call is recorded with the following structure:
+API call responses are formatted according to the MCP protocol:
 
 ```typescript
-interface ApiCallData {
-  url: string;
-  method: string;
-  requestHeaders: Record<string, string>;
-  requestBody?: any;
-  responseStatus: number;
-  responseHeaders: Record<string, string>;
-  responseBody?: any;
-  timestamp: number;
+interface ToolResponse {
+  content: Array<{
+    type: "text" | "image" | "audio" | "resource";
+    text?: string;
+    data?: string;
+    mimeType?: string;
+    resource?: {
+      text?: string;
+      uri: string;
+      blob?: string;
+      mimeType?: string;
+    };
+  }>;
+  _meta?: Record<string, unknown>;
+  isError?: boolean;
 }
 ```
 
