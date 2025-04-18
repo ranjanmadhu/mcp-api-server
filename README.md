@@ -39,6 +39,38 @@ npm run build
 npm start
 ```
 
+## VS Code Integration
+
+This server can be integrated with VS Code through the Model Context Protocol:
+
+1. Create a `.vscode` folder in your project (if it doesn't exist)
+2. Add a `mcp.json` file with the following configuration:
+
+```json
+{
+  "servers": {
+    "api-mcp-server": {
+      "type": "stdio",
+      "command": "sh",
+      "args": [
+        "-c",
+        "cd /path/to/mcp-api-server && npm run build && npm run start"
+      ]
+    }
+  }
+}
+```
+
+3. Replace `/path/to/mcp-api-server` with the absolute path to your project
+4. Restart VS Code or reload the window
+5. The MCP server will be available to compatible AI extensions
+
+### Troubleshooting
+
+- If the MCP server isn't connecting, check the VS Code Developer Console for errors
+- Verify the path in `mcp.json` is correct and accessible
+- Ensure the server builds successfully with `npm run build`
+
 ## MCP Integration
 
 This MCP server exposes the following tools:
