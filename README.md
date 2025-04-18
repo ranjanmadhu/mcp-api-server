@@ -10,6 +10,23 @@ An API-focused Model Context Protocol (MCP) server that provides authentication 
 - Well-typed responses using the MCP protocol structure
 - Response formatting for different content types (JSON, text)
 
+## Documentation
+
+This repository includes a comprehensive step-by-step guide for building MCP servers:
+
+- [BUILD_MCP_SERVER_GUIDE.md](./BUILD_MCP_SERVER_GUIDE.md): A detailed tutorial that walks through the process of creating a Model Context Protocol server from scratch, with explanations of core concepts, implementation details, and best practices.
+
+The guide covers:
+- Project setup and structure
+- MCP architecture fundamentals
+- Building core components
+- Authentication implementation
+- Creating custom tools
+- Testing and VS Code integration
+- Advanced feature suggestions
+
+Both beginners and experienced developers will find valuable information in this guide for implementing their own MCP servers.
+
 ## Prerequisites
 
 - Node.js 16+
