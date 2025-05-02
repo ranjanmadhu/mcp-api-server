@@ -2,6 +2,9 @@
 
 An API-focused Model Context Protocol (MCP) server that provides authentication and API call capabilities. This server allows secure API calls through MCP tools, with authentication management and response handling.
 
+## Architecture
+<img width="1506" alt="mcp-architecture" src="https://github.com/user-attachments/assets/fda1a1fe-86c0-4095-934a-1899215ea5f5" />
+
 ## Features
 
 - Authentication management with token-based security
